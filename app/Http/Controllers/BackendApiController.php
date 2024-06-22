@@ -4,63 +4,18 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Dept;
 use App\Models\Collor;
-use App\Models\Pocket;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Notice;
 use App\Models\Member;
+use App\Models\News;
+use App\Models\Subcategory;
 
 class BackendApiController extends Controller
 {
 
-
-  public function home_view(Request $request){
-
-      $about= Notice::leftjoin('weeks','weeks.id', '=','notices.category')
-      ->where('notices.dept_id',1)->where('notices.category',5)
-      ->select('weeks.week as category_name','notices.*')->orderby('serial','asc')->orderby('id','desc')->get();
-   
-      $title= Notice::leftjoin('weeks','weeks.id', '=','notices.category')
-      ->where('notices.dept_id',1)->where('notices.category',9)
-      ->select('weeks.week as category_name','notices.*')->orderby('serial','asc')->orderby('id','desc')->get();
-
-      $service= Notice::leftjoin('weeks','weeks.id','=','notices.category')
-      ->where('notices.dept_id',1)->where('notices.category',7)
-      ->select('weeks.week as category_name','notices.*')->orderby('serial','asc')->orderby('id','desc')->get();
-
-      $project= Notice::leftjoin('weeks','weeks.id','=','notices.category')
-      ->where('notices.dept_id',1)->where('notices.category',1)
-      ->select('weeks.week as category_name','notices.*')->orderby('serial','asc')->orderby('id','desc')->get();
-
-      $testimonial= Notice::leftjoin('weeks','weeks.id','=','notices.category')
-      ->where('notices.dept_id',1)->where('notices.category',4)
-      ->select('weeks.week as category_name','notices.*')->orderby('serial','asc')->orderby('id','desc')->get();
-
-     return view('frontend.home',['about'=>$about,'title'=>$title,'service'=>$service 
-     ,'project'=>$project,'testimonial'=>$testimonial]);
-  
-    }
-
-    public function about_view(Request $request){
-       $about= Notice::leftjoin('weeks','weeks.id', '=','notices.category')
-       ->where('notices.dept_id',1)->where('notices.category',5)
-       ->select('weeks.week as category_name','notices.*')->orderby('serial','asc')->orderby('id','desc')->get();
-       return view('frontend.about',['about'=>$about]);   
-     }
-
-     public function service_view(Request $request){
-           $service= Notice::leftjoin('weeks','weeks.id','=','notices.category')
-           ->where('notices.dept_id',1)->where('notices.category',7)
-           ->select('weeks.week as category_name','notices.*')->orderby('serial','asc')->orderby('id','desc')->get();
-         return view('frontend.service',['service'=>$service]);   
-      }
-
-      public function project_view(Request $request){
-           $project= Notice::leftjoin('weeks','weeks.id','=','notices.category')
-           ->where('notices.dept_id',1)->where('notices.category',1)
-           ->select('weeks.week as category_name','notices.*')->orderby('serial','asc')->orderby('id','desc')->get();
-         return view('frontend.project',['project'=>$project]);   
-       }
+    
 
 
     public function department_view(Request $request ,$dept_id){
@@ -71,34 +26,112 @@ class BackendApiController extends Controller
           ],200);
       }
 
-     public function collor_view(Request $request ,$dept_id){
+      public function collor_view(Request $request ,$dept_id){
         $data= Collor::where('dept_id',$dept_id)->get();
         return response()->json([
              'status'=>'success',
              'data'=>$data 
          ],200);
-     }
+      }
 
-     public function notice_view(Request $request ,$dept_id,$category){
-        $data= Notice::leftjoin('weeks','weeks.id', '=','notices.category')
-        ->where('notices.dept_id',$dept_id)->where('notices.category',$category)
-        ->select('weeks.week as category_name','notices.*')->orderby('serial','asc')->orderby('id','desc')->get();
+
+      public function category_view(Request $request,$dept_id){
+          $data= Category::where('dept_id',$dept_id)->orderby('serial','asc')->orderby('id','desc')->get();
+          return response()->json([
+               'status'=>'success',
+               'data'=>$data 
+          ],200);
+       }
+
+
+      public function category_nav(Request $request,$dept_id){
+         $data= Category::where('dept_id',$dept_id)->where('menu_ber','Nav')->orderby('serial','asc')->orderby('id','desc')->get();
+         return response()->json([
+               'status'=>'success',
+               'data'=>$data 
+           ],200);
+       }
+
+       public function category_side(Request $request,$dept_id){
+        $data= Category::where('dept_id',$dept_id)->where('menu_ber','Side')->orderby('serial','asc')->orderby('id','desc')->get();
           return response()->json([
               'status'=>'success',
               'data'=>$data 
            ],200);
-      }
+        }
 
-
-      public function member_view(Request $request ,$dept_id,$category){
-        $data= Member::leftjoin('weeks','weeks.id', '=','members.category')
-        ->where('members.dept_id',$dept_id)->where('members.category',$category)
-        ->select('weeks.week as category_name','members.*')->orderby('serial','asc')->orderby('id','desc')->get();
-          return response()->json([
+        public function sub_category(Request $request,$dept_id,$category){
+         $data= Subcategory::where('dept_id',$dept_id)->where('category_name_id',$category)->orderby('serial','asc')->orderby('id','desc')->get();
+           return response()->json([
                'status'=>'success',
                'data'=>$data 
-           ],200);
-      }
+            ],200);
+         }
+ 
+
+
+      public function news_category(Request $request ,$dept_id,$category){
+         $data= News::leftjoin('categories','categories.category_name', '=','news.category_name_id')
+         ->leftjoin('subcategories','subcategories.subcategory_name', '=','news.subcategory_name_id')
+         ->where('news.dept_id',$dept_id)->where('news.category_name_id',$category)
+         ->select('categories.name','subcategories.sub_name','news.*')->orderby('serial','asc')->orderby('id','desc')->get();
+           return response()->json([
+                'status'=>'success',
+                'data'=>$data 
+            ],200);
+       }
+
+
+       public function news_subcategory(Request $request ,$dept_id,$category,$subcategory){
+            $data= News::leftjoin('categories','categories.category_name','=','news.category_name_id')
+            ->leftjoin('subcategories','subcategories.subcategory_name','=','news.subcategory_name_id')
+            ->where('news.dept_id',$dept_id)->where('news.category_name_id',$category)
+            ->where('news.subcategory_name_id',$subcategory)
+            ->select('categories.name','subcategories.sub_name','news.*')->orderby('serial','asc')->orderby('id','desc')->get();
+               return response()->json([
+                  'status'=>'success',
+                  'data'=>$data 
+               ],200);
+         }
+
+
+        public function news_details_category(Request $request ,$dept_id,$category,$id){
+           $data= News::leftjoin('categories','categories.category_name','=','news.category_name_id')
+             ->leftjoin('subcategories','subcategories.subcategory_name','=','news.subcategory_name_id')
+             ->where('news.dept_id',$dept_id)->where('news.category_name_id',$category)
+             ->where('news.id',$id)
+             ->select('categories.name','subcategories.sub_name','news.*')->orderby('serial','asc')->orderby('id','desc')->first();
+                 return response()->json([
+                    'status'=>'success',
+                    'data'=>$data 
+                 ],200);
+        }
+
+
+        public function news_highlight(Request $request ,$dept_id){
+          $data= News::leftjoin('categories','categories.category_name','=','news.category_name_id')
+            ->leftjoin('subcategories','subcategories.subcategory_name','=','news.subcategory_name_id')
+            ->where('news.dept_id',$dept_id)
+            ->where('news.highlight_serial','>',0)
+            ->select('categories.name','subcategories.sub_name','news.*')->orderby('highlight_serial','asc')->orderby('id','desc')->get();
+                return response()->json([
+                   'status'=>'success',
+                   'data'=>$data 
+                ],200);
+         }
+
+
+         public function latest_news(Request $request ,$dept_id){
+              $data= News::leftjoin('categories','categories.category_name','=','news.category_name_id')
+              ->leftjoin('subcategories','subcategories.subcategory_name','=','news.subcategory_name_id')
+              ->where('news.dept_id',$dept_id)
+              ->select('categories.name','subcategories.sub_name','news.*')->orderby('id','desc')->get();
+                 return response()->json([
+                    'status'=>'success',
+                    'data'=>$data 
+                  ],200);
+            }
+
 
   
      public function contact_form(Request $request,$dept_id){

@@ -22,10 +22,19 @@ use App\Http\Controllers\BackendApiController;
 
       Route::get('{dept_id}/department_view/', [BackendApiController::class, 'department_view']);
       Route::get('{dept_id}/collor_view/', [BackendApiController::class,'collor_view']);
-
-      Route::get('{dept_id}/notice/{category}',[BackendApiController::class,'notice_view']);
       Route::post('{dept_id}/contact_form', [BackendApiController::class,'contact_form']);
-      Route::get('{dept_id}/member/{category}',[BackendApiController::class,'member_view']);
+
+      Route::get('{dept_id}/category',[BackendApiController::class,'category_view']);
+      Route::get('{dept_id}/category_nav',[BackendApiController::class,'category_nav']);
+      Route::get('{dept_id}/category_side',[BackendApiController::class,'category_side']);
+      Route::get('{dept_id}/sub_category/{category}',[BackendApiController::class,'sub_category']);
+
+      Route::get('{dept_id}/news/{category}',[BackendApiController::class,'news_category']);
+      Route::get('{dept_id}/news/{category}/{subcategory}',[BackendApiController::class,'news_subcategory']);
+      Route::get('{dept_id}/news-details/{category}/{id}',[BackendApiController::class,'news_details_category']);
+      Route::get('{dept_id}/news_highlight',[BackendApiController::class,'news_highlight']);
+      Route::get('{dept_id}/latest_news',[BackendApiController::class,'latest_news']);
+     
     
 
 

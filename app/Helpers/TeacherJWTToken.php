@@ -12,7 +12,7 @@ class TeacherJWTToken
           $payload=[
              'iss'=>'rayhan-token',
              'iat'=>time(),
-             'exp'=>time()+60*60*96,
+             'exp'=>time()+60*60*24*15,
              'id'=>$id,
              'email'=>$email,
              'teacher_name'=>$name,
@@ -25,17 +25,15 @@ class TeacherJWTToken
     public static function ReadToken($token)
     {
         try {
-            if($token==null){
+            if($token==null) {
                 return 'unauthorized';
-            }
-            else{
+            } else{
                 $key =env('JWT_KEY');
                 return JWT::decode($token,new Key($key,'HS256'));
             }
-        }
-        catch (Exception $e){
-            return 'unauthorized';
-        }
+
+            } catch (Exception $e){
+            return 'unauthorized'; }
     }
 }
 

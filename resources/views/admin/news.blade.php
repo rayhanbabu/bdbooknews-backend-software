@@ -2,17 +2,14 @@
 @section('page_title','Admin Panel')
 @section($category.'_select','active')
 
-<script type="text/javascript">
-     
-</script>
  @section('scripts')
-    <script src="{{ asset('js/news.js') }}"></script>
+   <script src="{{ asset('js/news.js') }}"></script>
  @endsection
-@section('content')
 
+@section('content')
   <div class="card mt-3 mb-0"> 
     <div class="card-header ">
-    <div class="row ">
+    <div class="row">
                <div class="col-6"> <h4 class="mt-0"> </h4></div>
                      <div class="col-3">
                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -67,8 +64,8 @@
  <table id="employee_data"  class="table table-bordered table-hover table-sm shadow">
     <thead>
     <tr>
-         <th width="10%" class="sorting" data-sorting_type="asc" data-column_name="date" style="cursor: pointer">Date 
-           <span id="date_icon" ><i class="fas fa-sort-amount-up-alt"></i></span> </th>
+         <th width="10%" class="sorting" data-sorting_type="asc" data-column_name="created_at" style="cursor: pointer">Date 
+           <span id="created_at_icon" ><i class="fas fa-sort-amount-up-alt"></i></span> </th>
           
             <th width="10%" class="sorting" data-sorting_type="asc" data-column_name="highlight_serial" style="cursor: pointer">Highlight Serial
             <span id="highlight_serial_icon"><i class="fas fa-sort-amount-up-alt"></span></th>   

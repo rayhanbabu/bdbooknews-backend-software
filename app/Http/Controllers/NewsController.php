@@ -61,7 +61,8 @@ class NewsController extends Controller
               $query->orWhere('categories.category_name', 'like', '%'.$search.'%');
               $query->orWhere('subcategories.subcategory_name', 'like', '%'.$search.'%');
               $query->orWhere('news.created_at', 'like', '%'.$search.'%');
-              $query->orWhere('districts.bn_name', 'like', '%'.$search.'%');
+              $query->orWhere('districts.id', 'like', '%'.$search.'%');
+              
            })->select('categories.category_name','subcategories.subcategory_name','divisions.bn_name as division'
            ,'districts.bn_name as district','upazilas.bn_name as upazila','news.*')->orderBy($sort_by,$sort_type)->paginate($range);
 

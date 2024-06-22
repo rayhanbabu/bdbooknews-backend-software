@@ -30,7 +30,7 @@
     <script src="{{asset('dashboardfornt/js/sweetalert.min.js')}}"></script>
     <script src="{{asset('dashboardfornt/js/scripts.js')}}"></script>
     <script src="{{asset('dashboardfornt/js/bootstrap-clockpicker.min.js')}}"></script>
-    <script src="{{asset('js/news.js')}}"></script>
+    
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
@@ -152,9 +152,9 @@
 <main>
 
 <div class="container-fluid px-3">
-      <div>
-     @yield('content')
-     </div>
+       <div>
+      @yield('content')
+       </div>
 </div>    
 
     </main>

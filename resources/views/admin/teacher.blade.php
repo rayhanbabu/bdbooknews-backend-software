@@ -59,7 +59,7 @@
           <th  width="10%"> Image</th>
           <th width="25%" class="sorting" data-sorting_type="asc" data-column_name="teacher_name" style="cursor: pointer">Member Name 
                 <span id="teacher_name_icon" ><i class="fas fa-sort-amount-up-alt"></i></span> </th>
-          <th  width="20%"> Nickname</th>
+          <th  width="20%"> Nick Name</th>
           <th  width="25%"> Designation </th>
           <th  width="10%"> Phone</th>
           <th  width="10%"> Email</th>
@@ -326,10 +326,8 @@
 
 <script>  
   $(document).ready(function(){ 
-
     $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} });
 
-    
          fetchAll();
          function fetchAll(){
             $.ajax({
@@ -515,10 +513,6 @@
       });
 
 
-
-
-
-
    function fetch_data(page, sort_type="", sort_by="", search="",range=""){
     $.ajax({
       url:"/admin/teacher/fetch_data?page="+page+"&sortby="+sort_by+"&sorttype="+sort_type+"&search="+search+"&range="+range,
@@ -526,13 +520,12 @@
                {
                $('.loader_page').show();
                },
-    success:function(data)
-    {
-      $('.loader_page').hide();
-    $('tbody').html('');
-    $('.x_content tbody').html(data);
-  
-    }
+        success:function(data)
+       {
+         $('.loader_page').hide();
+         $('tbody').html('');
+         $('.x_content tbody').html(data);
+       }
     });
      }
 
@@ -559,7 +552,7 @@ $(document).on('keyup', '#search', function(){
     }); 
 
 
-    $(document).on('click', '.sorting', function(){
+    $(document).on('click','.sorting', function(){
           var column_name = $(this).data('column_name');
           var order_type = $(this).data('sorting_type');
           var reverse_order = '';
@@ -585,25 +578,16 @@ $(document).on('keyup', '#search', function(){
 
 
 
+    $(document).on('change','#range', function(){
+         var search = $('#search').val();
+         var column_name = $('#hidden_column_name').val();
+         var sort_type = $('#hidden_sort_type').val();
+         var page = $('#hidden_page').val();
+         var range = $('#range').val();
+         fetch_data(page, sort_type, column_name, search,range);
+    });
 
-   
-
-  $(document).on('change', '#range', function(){
-    var search = $('#search').val();
-    var column_name = $('#hidden_column_name').val();
-    var sort_type = $('#hidden_sort_type').val();
-    var page = $('#hidden_page').val();
-    var range = $('#range').val();
-    fetch_data(page, sort_type, column_name, search,range);
   });
-
-
-	
-
-
-
-
-});
 
 </script>
 

@@ -299,9 +299,9 @@ public function store(Request $request){
             }
            $model->save();
               return response()->json([
-                'status'=>200,  
-                'message'=>'Data Added Successfull',
-             ]);       
+                 'status'=>200,  
+                 'message'=>'Data Added Successfull',
+              ]);       
          }
      }
 
