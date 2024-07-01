@@ -82,42 +82,43 @@
                               @endif
                           @endforeach  
                       </select>
-          </div>
+             </div>
 
            <div class="col-sm-2 my-2">
              <label class=""> District  </label>
                       <select class="form-select" name="district_id" id="district_id" aria-label="Default select example" >
                          <option  value=""> Select One </option>
-                          
                       </select>
            </div>
 
-
              <div class="col-sm-2 my-2">
-                <label class=""> Upazila  </label>
-                       <select class="form-select" name="upazila_id" id="upazila_id" aria-label="Default select example" >
-                         <option   value=""> Select One </option>
-                           
-                      </select>
-              </div>
+                 <label class=""> Upazila  </label>
+                        <select class="form-select" name="upazila_id" id="upazila_id" aria-label="Default select example" >
+                             <option   value=""> Select One </option>                      
+                        </select>
+               </div>
 
            <div class="col-sm-2 my-2">
                <label class=""> Highlight  </label>
                 <input type="number" name="highlight_serial" id="highlight_serial" class="form-control" value="{{ $data->highlight_serial }}" placeholder="" required>
            </div>
 
+           <div class="col-sm-9 my-2">
+                 <label for="exampleFormControlTextarea1" class="form-label"> Title <span style="color:red;"> * </span> </label>
+                 <input type="text" name="title" id="title" class="form-control" value=" {{ $data->title }}" placeholder="" required>
+           </div>
 
-          <div class="col-sm-12 my-2">
-              <label for="exampleFormControlTextarea1" class="form-label"> Title <span style="color:red;"> * </span> </label>
-              <textarea name="title" id="summernote" cols="30" rows="10" > {{ $data->title }}</textarea required>
-          </div>
+            <div class="col-sm-3 my-2">
+                 <label  class="form-label">  Most Read   </label>
+                 <input type="number" name="geater_serial" id="geater_serial" class="form-control" value="{{ $data->geater_serial }}" placeholder="" required>
+            </div>
 
-          <div class="col-sm-3 my-2">
-              <label for="roll"> Image <span style="color:red;"> * </span></label>
-              <input type="file" name="image" id="image" class="form-control" placeholder="" >  
+           <div class="col-sm-3 my-2">
+               <label for="roll"> Image <span style="color:red;"> * </span></label>
+               <input type="file" name="image" id="image" class="form-control" placeholder="" >  
               
-              <label for="roll">Image Title <span style="color:red;"> * </span> </label>
-              <input type="text" name="image_title" id="image_title" value="{{ $data->image_title }}" class="form-control" placeholder="" required>
+               <label for="roll">Image Title <span style="color:red;"> * </span> </label>
+               <input type="text" name="image_title" id="image_title" value="{{ $data->image_title }}" class="form-control" placeholder="" required>
            </div>
 
            <div class="col-sm-9 my-2">

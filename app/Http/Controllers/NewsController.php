@@ -105,6 +105,7 @@ class NewsController extends Controller
         $model->upazila_id=$request->input('upazila_id');
 
         $model->highlight_serial=$request->input('highlight_serial');
+      
         $model->desc1=$request->input('desc1');
 
         $model->image_title=$request->input('image_title');
@@ -189,6 +190,7 @@ class NewsController extends Controller
         $model->upazila_id=$request->input('upazila_id');
 
         $model->highlight_serial=$request->input('highlight_serial');
+        $model->geater_serial=$request->input('geater_serial');
         $model->desc1=$request->input('desc1');
 
         $model->image_title=$request->input('image_title');

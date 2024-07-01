@@ -172,6 +172,17 @@ class BackendApiController extends Controller
                   ],200);
             }
 
+            public function most_read(Request $request ,$dept_id){
+               $data= News::leftjoin('categories','categories.category_name','=','news.category_name_id')
+               ->leftjoin('subcategories','subcategories.subcategory_name','=','news.subcategory_name_id')
+               ->where('news.dept_id',$dept_id)
+               ->select('categories.name','subcategories.sub_name','news.*')->orderby('geater_serial','desc')->orderby('id','desc')->limit(7)->get();
+                  return response()->json([
+                     'status'=>'success',
+                     'data'=>$data 
+                   ],200);
+             }
+
 
   
      public function contact_form(Request $request,$dept_id){

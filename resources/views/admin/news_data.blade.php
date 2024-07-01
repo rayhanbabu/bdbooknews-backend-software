@@ -2,6 +2,7 @@
         <tr>
                   <td> {{ $row->created_at}} </td>     
                   <td> {{ $row->highlight_serial}} </td> 
+                  <td> {{ $row->geater_serial}} </td> 
                   <td> {{ $row->category_name}} </td>     
                   <td> {{ $row->subcategory_name}} </td>               
                   <td> {!! $row->title !!} </td>

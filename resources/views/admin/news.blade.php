@@ -9,7 +9,7 @@
 @section('content')
   <div class="card mt-3 mb-0"> 
     <div class="card-header ">
-    <div class="row">
+      <div class="row">
                <div class="col-6"> <h4 class="mt-0"> </h4></div>
                      <div class="col-3">
                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -23,7 +23,7 @@
         </div> 
  </div> 
 
- <div class="form-group  mx-2 my-2">
+ <div class="form-group mx-2 my-2">
                            @if(Session::has('fail'))
                    <div  class="alert alert-danger"> {{Session::get('fail')}}</div>
                                 @endif
@@ -69,6 +69,9 @@
           
             <th width="10%" class="sorting" data-sorting_type="asc" data-column_name="highlight_serial" style="cursor: pointer">Highlight Serial
             <span id="highlight_serial_icon"><i class="fas fa-sort-amount-up-alt"></span></th>   
+          
+            <th width="10%" class="sorting" data-sorting_type="asc" data-column_name="geater_serial" style="cursor: pointer">Most Read 
+            <span id="geater_serial_icon"><i class="fas fa-sort-amount-up-alt"></span></th>   
             
             <th width="10%" class="sorting" data-sorting_type="asc" data-column_name="category_name" style="cursor: pointer">Category Name
             <span id="category_name_icon"><i class="fas fa-sort-amount-up-alt"></span></th>   
@@ -104,8 +107,7 @@
                 <img src="{{ asset('images/abc.gif') }}" alt="" style="width: 50px;height:50px;">
             </div>
          </td>
-      </tr>
-         
+      </tr>         
     </thead>
     <tbody>
        

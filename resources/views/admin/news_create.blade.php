@@ -99,8 +99,9 @@
 
           <div class="col-sm-12 my-2">
               <label for="exampleFormControlTextarea1" class="form-label"> Title <span style="color:red;"> * </span> </label>
-              <textarea name="title" id="summernote" cols="30" rows="10" > {{ old('title') }}</textarea required>
-          </div>
+
+              <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" placeholder="" required>
+            </div>
 
           <div class="col-sm-3 my-2">
               <label for="roll"> Image <span style="color:red;"> * </span></label>
