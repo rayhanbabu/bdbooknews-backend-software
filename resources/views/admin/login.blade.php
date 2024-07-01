@@ -41,7 +41,7 @@
 				<div class="col-md-7 col-lg-5">
 					<div class="login-wrap p-4 p-md-5">
 				 <h5></h5>
-		      	<h3 class="text-center mb-4">Ancova Login </h3>
+		      	<h3 class="text-center mb-4">Editor Login </h3>
 				   <form method="post"  id="email_form"  class="myform"  enctype="multipart/form-data" >
 		      		  <div class="form-group">
 		      		    <input type="text" class="form-control rounded-left" autocomplete="off" id="phone"  name="phone" placeholder="Phone Number" >

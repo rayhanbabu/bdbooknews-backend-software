@@ -11,12 +11,10 @@ use App\Models\Notice;
 use App\Models\Member;
 use App\Models\News;
 use App\Models\Subcategory;
+use Illuminate\Support\Collection;
 
 class BackendApiController extends Controller
 {
-
-    
-
 
     public function department_view(Request $request ,$dept_id){
          $data= Dept::where('id',$dept_id)->first();
@@ -52,6 +50,7 @@ class BackendApiController extends Controller
            ],200);
        }
 
+
        public function category_side(Request $request,$dept_id){
         $data= Category::where('dept_id',$dept_id)->where('menu_ber','Side')->orderby('serial','asc')->orderby('id','desc')->get();
           return response()->json([
@@ -59,6 +58,7 @@ class BackendApiController extends Controller
               'data'=>$data 
            ],200);
         }
+
 
         public function sub_category(Request $request,$dept_id,$category){
          $data= Subcategory::where('dept_id',$dept_id)->where('category_name_id',$category)->orderby('serial','asc')->orderby('id','desc')->get();
@@ -68,18 +68,58 @@ class BackendApiController extends Controller
             ],200);
          }
  
+         public function news_highlight_category(Request $request ,$dept_id,$category){
+            $data= News::leftjoin('categories','categories.category_name', '=','news.category_name_id')
+            ->leftjoin('subcategories','subcategories.subcategory_name', '=','news.subcategory_name_id')
+            ->where('news.dept_id',$dept_id)->where('news.category_name_id',$category)
+            ->select('categories.name','subcategories.sub_name','news.*')->orderby('serial','asc')->orderby('id','desc')->limit(7)->get();
+              return response()->json([
+                   'status'=>'success',
+                   'data'=>$data 
+               ],200);
+          }
+
 
 
       public function news_category(Request $request ,$dept_id,$category){
-         $data= News::leftjoin('categories','categories.category_name', '=','news.category_name_id')
-         ->leftjoin('subcategories','subcategories.subcategory_name', '=','news.subcategory_name_id')
-         ->where('news.dept_id',$dept_id)->where('news.category_name_id',$category)
-         ->select('categories.name','subcategories.sub_name','news.*')->orderby('serial','asc')->orderby('id','desc')->get();
-           return response()->json([
-                'status'=>'success',
-                'data'=>$data 
-            ],200);
-       }
+
+           $data_7= News::where('dept_id',$dept_id)->where('category_name_id',$category)
+            ->select('id','serial')->orderby('serial','asc')->orderby('id','desc')->limit(7)->get();
+
+            foreach ($data_7 as $row) {
+                $array[] = $row->id;  // Add the ID to the array
+            }
+            // If you want unique IDs (though they should already be unique in this case)
+            $array = array_unique($array);
+
+            //$perPage=$request->input('perPage',18);
+            $perPage=8;
+            $page=$request->input('page',1);
+            $query=News::query();
+            if($search=$request->search){
+                 $query->whereRaw("title LIKE '%".$search."%'")
+                   ->orWhereRaw("desc LIKE '%".$search."%'");
+             }
+           
+            $query->leftjoin('categories','categories.category_name', '=','news.category_name_id');
+            $query->leftjoin('subcategories','subcategories.subcategory_name', '=','news.subcategory_name_id');
+            $query->where('news.dept_id',$dept_id)->where('news.category_name_id',$category)->whereNotIn('news.id', $array);
+            $query->select('categories.name','subcategories.sub_name','news.*');
+           
+            $total=$query->count();
+            $query->orderBy("serial", 'asc')->orderby('id','desc');
+            $result=$query->offset(($page-1) * $perPage)->limit($perPage)->get();
+  
+               return response()->json([
+                    'status'=>'success',
+                    'array'=>$array,
+                    'data'=>$result, 
+                    'total'=>$total,
+                    'page'=>$page,
+                    'last_page'=>ceil($total/$perPage)
+             
+                 ],200);
+           }
 
 
        public function news_subcategory(Request $request ,$dept_id,$category,$subcategory){
@@ -110,22 +150,22 @@ class BackendApiController extends Controller
 
         public function news_highlight(Request $request ,$dept_id){
           $data= News::leftjoin('categories','categories.category_name','=','news.category_name_id')
-            ->leftjoin('subcategories','subcategories.subcategory_name','=','news.subcategory_name_id')
-            ->where('news.dept_id',$dept_id)
-            ->where('news.highlight_serial','>',0)
-            ->select('categories.name','subcategories.sub_name','news.*')->orderby('highlight_serial','asc')->orderby('id','desc')->get();
+             ->leftjoin('subcategories','subcategories.subcategory_name','=','news.subcategory_name_id')
+             ->where('news.dept_id',$dept_id)
+             ->where('news.highlight_serial','>',0)
+             ->select('categories.name','subcategories.sub_name','news.*')->orderby('highlight_serial','asc')->orderby('id','desc')->limit(8)->get();
                 return response()->json([
                    'status'=>'success',
                    'data'=>$data 
                 ],200);
-         }
+          }
 
 
          public function latest_news(Request $request ,$dept_id){
               $data= News::leftjoin('categories','categories.category_name','=','news.category_name_id')
               ->leftjoin('subcategories','subcategories.subcategory_name','=','news.subcategory_name_id')
               ->where('news.dept_id',$dept_id)
-              ->select('categories.name','subcategories.sub_name','news.*')->orderby('id','desc')->get();
+              ->select('categories.name','subcategories.sub_name','news.*')->orderby('id','desc')->limit(7)->get();
                  return response()->json([
                     'status'=>'success',
                     'data'=>$data 

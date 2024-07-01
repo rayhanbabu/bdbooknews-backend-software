@@ -29,6 +29,7 @@ use App\Http\Controllers\BackendApiController;
       Route::get('{dept_id}/category_side',[BackendApiController::class,'category_side']);
       Route::get('{dept_id}/sub_category/{category}',[BackendApiController::class,'sub_category']);
 
+      Route::get('{dept_id}/news_highlight/{category}',[BackendApiController::class,'news_highlight_category']);
       Route::get('{dept_id}/news/{category}',[BackendApiController::class,'news_category']);
       Route::get('{dept_id}/news/{category}/{subcategory}',[BackendApiController::class,'news_subcategory']);
       Route::get('{dept_id}/news-details/{category}/{id}',[BackendApiController::class,'news_details_category']);
