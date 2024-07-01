@@ -137,7 +137,7 @@ class BackendApiController extends Controller
 
          $data_7= News::where('dept_id',$dept_id)->where('category_name_id',$category)
          ->where('subcategory_name_id',$subcategory)
-         ->select('id','serial')->orderby('serial','asc')->orderby('id','desc')->limit(1)->get();
+         ->select('id','serial')->orderby('serial','asc')->orderby('id','desc')->limit(7)->get();
 
          foreach ($data_7 as $row) {
              $array[] = $row->id;  // Add the ID to the array
