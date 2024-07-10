@@ -99,6 +99,7 @@ class NewsController extends Controller
         $model->subcategory_name_id=$request->input('subcategory_name_id');
         $model->title=$request->input('title');
         $model->desc=$request->input('desc');
+        $model->title_color=$request->input('title_color');
 
         $model->division_id=$request->input('division_id');
         $model->district_id=$request->input('district_id');
@@ -183,6 +184,7 @@ class NewsController extends Controller
         $model->category_name_id=$request->input('category_name_id');
         $model->subcategory_name_id=$request->input('subcategory_name_id');
         $model->title=$request->input('title');
+        $model->title_color=$request->input('title_color');
         $model->desc=$request->input('desc');
 
         $model->division_id=$request->input('division_id');

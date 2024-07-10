@@ -12,6 +12,7 @@ use App\Models\Member;
 use App\Models\News;
 use App\Models\Subcategory;
 use Illuminate\Support\Collection;
+use App\Models\Ads;
 
 class BackendApiController extends Controller
 {
@@ -122,6 +123,43 @@ class BackendApiController extends Controller
            }
 
 
+           public function news_search(Request $request ,$dept_id){
+            
+               //$perPage=$request->input('perPage',18);
+               $perPage=10;
+               $page=$request->input('page',1);
+               $query=News::query();
+               $search=$request->search;
+                
+            
+               $query->leftjoin('categories','categories.category_name', '=','news.category_name_id');
+               $query->leftjoin('subcategories','subcategories.subcategory_name', '=','news.subcategory_name_id');
+               $query->where('news.dept_id',$dept_id);
+               $query->select('categories.name','subcategories.sub_name','news.*');
+
+               if ($search) {
+                  $query->where(function($q) use ($search) {
+                      $q->where('news.title', 'like', '%' . $search . '%')
+                        ->orWhere('news.category_name_id', 'like', '%' . $search . '%');
+                  });
+              }
+            
+               $total=$query->count();
+               $query->orderBy("serial", 'asc')->orderby('id','desc');
+               $result=$query->offset(($page-1) * $perPage)->limit($perPage)->get();
+   
+                return response()->json([
+                     'status'=>'success',
+                     'data'=>$result, 
+                     'total'=>$total,
+                     'page'=>$page,
+                     'last_page'=>ceil($total/$perPage)
+              
+                  ],200);
+            }
+ 
+
+
            public function news_highlight_subcategory(Request $request ,$dept_id,$category,$subcategory){
                $data= News::leftjoin('categories','categories.category_name', '=','news.category_name_id')
                 ->leftjoin('subcategories','subcategories.subcategory_name', '=','news.subcategory_name_id')
@@ -157,7 +195,7 @@ class BackendApiController extends Controller
           $query->leftjoin('categories','categories.category_name', '=','news.category_name_id');
           $query->leftjoin('subcategories','subcategories.subcategory_name', '=','news.subcategory_name_id');
           $query->where('news.dept_id',$dept_id)->where('news.category_name_id',$category)
-             ->where('news.subcategory_name_id',$subcategory)->whereNotIn('news.id', $array);
+         ->where('news.subcategory_name_id',$subcategory)->whereNotIn('news.id', $array);
           $query->select('categories.name','subcategories.sub_name','news.*');
          
           $total=$query->count();
@@ -222,6 +260,15 @@ class BackendApiController extends Controller
                      'data'=>$data 
                    ],200);
              }
+
+         public function ads_show(Request $request ,$dept_id){
+             $data= Ads::where('dept_id',$dept_id)->orderby('serial','desc')->orderby('id','desc')->get();
+                  return response()->json([
+                     'status'=>'success',
+                     'data'=>$data 
+                   ],200);
+          }
+
 
 
   

@@ -13,6 +13,7 @@ use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubcategoryController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\AdsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +146,15 @@ use App\Http\Controllers\NewsController;
             Route::post('/admin/category_update',[CategoryController::class,'category_update']);
             Route::delete('/admin/category_delete',[CategoryController::class,'category_delete']);
 
+
+             //Ads  create
+             Route::get('/admin/ads_view',[AdsController::class,'ads_view']);
+             Route::get('/admin/ads_fetch',[AdsController::class,'fetch']);
+             Route::get('/admin/ads/fetch_data',[AdsController::class,'fetch_data']);
+             Route::post('/admin/ads_store',[AdsController::class,'store']);
+             Route::get('/admin/ads_edit',[AdsController::class,'ads_edit']);
+             Route::post('/admin/ads_update',[AdsController::class,'ads_update']);
+             Route::delete('/admin/ads_delete',[AdsController::class,'ads_delete']);
 
             //subcategory  create
             Route::get('/admin/subcategory_view',[SubcategoryController::class,'subcategory_view']);

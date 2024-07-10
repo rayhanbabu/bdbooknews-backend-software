@@ -97,6 +97,8 @@
            </nav>
      </div>
 
+
+
         <a class="nav-link @yield('category')" href="{{url('/admin/category_view')}}">
           <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
              Category View 
@@ -111,6 +113,12 @@
           <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
              News
         </a> 
+
+
+         <a class="nav-link @yield('ads')" href="{{url('/admin/ads_view')}}">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+               Ads
+          </a>  
  
 
      

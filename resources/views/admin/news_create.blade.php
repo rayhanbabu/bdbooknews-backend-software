@@ -97,11 +97,18 @@
            </div>
 
 
-          <div class="col-sm-12 my-2">
-              <label for="exampleFormControlTextarea1" class="form-label"> Title <span style="color:red;"> * </span> </label>
-
-              <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" placeholder="" required>
+            <div class="col-sm-10 my-2">
+                <label for="exampleFormControlTextarea1" class="form-label"> Title <span style="color:red;"> * </span> </label>
+                <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" placeholder="" required>
             </div>
+
+              <div class="col-sm-2 my-2">
+                   <label class="form-label"> Title  Color<span style="color:red;"> * </span> </label>
+                      <select class="form-select" name="title_color" id="title_color" aria-label="Default select example" >
+                           <option   value="0"> Black</option>
+                           <option   value="1"> Red </option>
+                      </select>
+               </div>
 
           <div class="col-sm-3 my-2">
               <label for="roll"> Image <span style="color:red;"> * </span></label>

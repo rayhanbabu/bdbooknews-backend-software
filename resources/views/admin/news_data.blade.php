@@ -4,8 +4,13 @@
                   <td> {{ $row->highlight_serial}} </td> 
                   <td> {{ $row->geater_serial}} </td> 
                   <td> {{ $row->category_name}} </td>     
-                  <td> {{ $row->subcategory_name}} </td>               
-                  <td> {!! $row->title !!} </td>
+                  <td> {{ $row->subcategory_name}} </td> 
+                  @if($row->title_color==1)
+                        <td class="text-danger"> {!! $row->title !!} </td>
+                  @else 
+                         <td> {!! $row->title !!} </td>
+                  @endif
+                
                   <td><img src="{{ asset('/uploads/admin/'.$row->image) }}" width="70" class="img-thumbnail" alt="Image"></td>
                   
                   <td> {{ $row->division}} </td>    

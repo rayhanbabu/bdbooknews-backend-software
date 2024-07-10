@@ -5,6 +5,7 @@ use Exception;
 use App\Models\Collor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\validator;
 
 class CollorController extends Controller
 {

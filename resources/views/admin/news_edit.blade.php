@@ -108,10 +108,23 @@
                  <input type="text" name="title" id="title" class="form-control" value=" {{ $data->title }}" placeholder="" required>
            </div>
 
-            <div class="col-sm-3 my-2">
+            <div class="col-sm-1 my-2">
                  <label  class="form-label">  Most Read   </label>
                  <input type="number" name="geater_serial" id="geater_serial" class="form-control" value="{{ $data->geater_serial }}" placeholder="" required>
             </div>
+
+            <div class="col-sm-2 my-2">
+                   <label class="form-label"> Title  Color<span style="color:red;"> * </span> </label>
+                      <select class="form-select" name="title_color" id="title_color" aria-label="Default select example" >
+                           @if($data->title_color==0)
+                               <option   value="0"> Black</option>
+                               <option   value="1"> Red </option>
+                           @else   
+                               <option   value="1"> Red </option>
+                               <option   value="0"> Black</option>
+                           @endif
+                      </select>
+               </div>
 
            <div class="col-sm-3 my-2">
                <label for="roll"> Image <span style="color:red;"> * </span></label>
