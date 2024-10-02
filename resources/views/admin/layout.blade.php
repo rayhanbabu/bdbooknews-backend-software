@@ -84,7 +84,9 @@
         </a>
 
      @if(adminaccess())
-     <a class="nav-link @yield('sleeve')  
+
+
+     <!-- <a class="nav-link @yield('sleeve')  
        collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
          <div class="sb-nav-link-icon "><i class="fas fa-columns"></i></div>
               Setting
@@ -95,7 +97,7 @@
            <nav class="sb-sidenav-menu-nested nav">
                <a class="nav-link @yield('collor')" href="{{url('/admin/collor_view')}}"> Contact View </a>
            </nav>
-     </div>
+     </div> -->
 
 
 
@@ -124,23 +126,10 @@
      
         <a class="nav-link @yield('teacher')" href="{{url('/admin/teacher_view')}}">
           <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-             Member
+             User
         </a>  
  
        @endif
-
-
-      
-
-    
-  
-
-
-
-
-   
-
-    
 
   </div>
  </div>

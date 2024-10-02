@@ -10,7 +10,7 @@
   <div class="card mt-3 mb-0"> 
     <div class="card-header ">
       <div class="row">
-               <div class="col-6"> <h4 class="mt-0"> </h4></div>
+               <div class="col-6"> <h4 class="mt-0"> News </h4></div>
                      <div class="col-3">
                          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             

@@ -8,6 +8,7 @@ use App\Models\Univer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Exception;
 
@@ -69,7 +70,7 @@ class DeptController extends Controller
               $teacher->designation=$model->dept_address;
               $teacher->email=$request->input('email');
               $teacher->phone =$request->input('phone');
-              $teacher->password =$request->input('password');
+              $teacher->password =Hash::make($request->input('password'));
               $teacher->created_by=$maintain_id;
               $teacher->role='admin';
               $teacher->save();
@@ -101,13 +102,9 @@ class DeptController extends Controller
         'dept_name'=>'required',
         'phone'=>'required|unique:teachers,phone,'.$request->input('teacher_id'),
         'email'=>'required|unique:teachers,email,'.$request->input('teacher_id'),
-        'password'=>'required|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
         'image'=> 'image|mimes:jpeg,png,jpg|max:400',
       ],
-       [
-        'password.regex'=>'password minimum six characters including one uppercase letter, 
-         one lowercase letter and one number'
-      ]);
+       );
   
       $maintain_id = $request->header('maintain_id');
       $role = $request->header('role');
@@ -141,7 +138,6 @@ class DeptController extends Controller
             $teacher->designation=$model->dept_address;
             $teacher->email=$request->input('email');
             $teacher->phone =$request->input('phone');
-            $teacher->password =$request->input('password');
             $teacher->teacher_status =$request->input('teacher_status');
             $teacher->created_by=$maintain_id;
             $teacher->update(); 

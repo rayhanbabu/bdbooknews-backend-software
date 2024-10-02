@@ -88,7 +88,7 @@
           Location   
     </a>
 
-    <a class="nav-link @yield('week')" href="{{url('maintain/week-view')}}">
+    <!-- <a class="nav-link @yield('week')" href="{{url('maintain/week-view')}}">
         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
           Client Category  
     </a>
@@ -97,10 +97,6 @@
              <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                 Maintain View  
          </a>
-
-        
-
-       
 
 
       <a class="nav-link @yield('Life_Member_select')  @yield('Member_select')  @yield('Executive_select')
@@ -115,21 +111,24 @@
           <a class="nav-link @yield('Life_Member_select')" href="{{url('#')}}">Life Member</a>
           <a class="nav-link @yield('Member_select')" href="{{url('#')}}">Member </a>
       </nav>
- </div>
+ </div> -->
+
+
+
        @else
      @endif
     
-
+ 
      <a class="nav-link @yield('hall')" href="{{url('maintain/dept_view')}}">
         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-           Department Store 
+           Department 
      </a>
 
 
-     <a class="nav-link @yield('resize')" href="{{url('maintain/resize')}}">
+     <!-- <a class="nav-link @yield('resize')" href="{{url('maintain/resize')}}">
         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
            Resize
-     </a>
+     </a> -->
 
     
 

@@ -3,13 +3,13 @@
 @section('hall','active')
 @section('content')
 
- <div class="row mt-3 mb-0 mx-2">
-                <div class="col-sm-3 my-2"> <h5 class="mt-0">Department store  View </h5></div>
+   <div class="row mt-3 mb-0 mx-2">
+                <div class="col-sm-3 my-2"> <h5 class="mt-0"> Department View </h5></div>
                      
                  <div class="col-sm-3 my-2">
-                 <div class="d-grid gap-2 d-flex justify-content-end"> 
-                 <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">Add</button>  
-                </div>    
+                    <div class="d-grid gap-2 d-flex justify-content-end"> 
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">Add</button>  
+                   </div>    
                 </div>
 
                 <div class="col-sm-6 my-2 ">
@@ -54,7 +54,7 @@
        <tr>
            <th  width="10%">ID </th>
            <th  width="10%">Location </th>
-           <th width="25%" class="sorting" data-sorting_type="asc" data-column_name="dept_name" style="cursor: pointer">Department store
+           <th width="25%" class="sorting" data-sorting_type="asc" data-column_name="dept_name" style="cursor: pointer">Department 
                    <span id="dept_name_icon" ><i class="fas fa-sort-amount-up-alt"></i></span></th>
            <th  width="10%">Address</th>
            <th  width="10%">Email</th>
@@ -64,8 +64,6 @@
            <th  width="10%">Status</th>
 		       <th  width="10%"></th>
 		       <th  width="10%"></th>
-
-         
       </tr>
 
        <tr>
@@ -120,13 +118,13 @@
            @endif
 
             <div class="col-lg-12 my-2">
-               <label for="roll">Dept store Name<span style="color:red;"> * </span></label>
+               <label for="roll">Dept  Name<span style="color:red;"> * </span></label>
                <input type="text" name="dept_name" id="dept_name" class="form-control" placeholder="" required>
                <p class="text-danger error_hall"></p>
             </div>
 
             <div class="col-lg-12 my-2">
-                <label for="roll"> Dept store Address <span style="color:red;"> * </span></label>
+                <label for="roll"> Dept  Address <span style="color:red;"> * </span></label>
                 <input type="text" name="dept_address" id="dept_address" class="form-control" placeholder="" required>
             </div>
 
@@ -240,11 +238,11 @@
                  <input type="text" name="phone" id="edit_phone" class="form-control" placeholder="" required>
             </div>
 
-            <div class="col-lg-6 my-2">
+            <!-- <div class="col-lg-6 my-2">
                 <label for="roll">Password <span style="color:red;"> * </span></label>
                 <input type="text" name="password" id="edit_password" class="form-control" placeholder="" required>
                 <p class="text-danger error_password"></p>
-            </div>
+            </div> -->
 
 
              <div class="col-lg-6 my-2">

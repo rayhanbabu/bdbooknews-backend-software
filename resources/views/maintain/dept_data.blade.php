@@ -19,11 +19,7 @@
                 <td> <button type="button" value="{{ $row->id}}" class="btn btn-danger btn-sm deleteIcon" >Delete</button>  </td>
              
 
-             <td>  {{ $row->payment}} </td>   
-             <td>  {{ $row->member}} </td> 
-             <td>  {{ $row->teacher}} </td> 
-             <td>  {{ $row->event}} </td>  
-             <td>  {{ $row->animal}} </td>  
+             
              
              </tr>             
 @endforeach

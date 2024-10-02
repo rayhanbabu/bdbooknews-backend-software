@@ -11,19 +11,20 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Helpers\TeacherJWTToken;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
 use Exception;
 
 
 class TeacherController extends Controller
 {
     
-    public function login(Request $request)
-    {
+    public function login(Request $request){
         try {
-            return view('admin.login');
-        } catch (Exception $e) {
-            return  view('errors.error', ['error' => $e]);
-        }
+               return view('admin.login');
+          } catch (Exception $e) {
+               return  view('errors.error', ['error' => $e]);
+          }
     }
 
     public function dashboard(Request $request)
@@ -57,39 +58,49 @@ class TeacherController extends Controller
             ]);
         } else {
 
-            $username = Teacher::where('phone', $request->phone)->first();
-            $status = 1;
-            if ($username) {
-                if ($username->password == $request->password) {
-                    if ($username->teacher_status == $status) {
-                        $rand = rand(11111, 99999);
-                        DB::update("update teachers set login_code ='$rand' where phone = '$username->phone'");
-                        SendEmail($username->email, "teacher Otp code", "One Time OTP Code", $rand, "ANCOVA");
-                        return response()->json([
-                            'status' => 200,
-                            'phone' => $username->phone,
-                            'email' => $username->email,
-                        ]);
-                    } else {
-                        return response()->json([
-                            'status' => 600,
-                            'message' => 'Acount Inactive',
-                        ]);
-                    }
-                } else {
-                    return response()->json([
-                        'status' => 400,
-                        'message' => 'Invalid Password',
-                    ]);
-                }
-            } else {
-                return response()->json([
-                    'status' => 300,
-                    'message' => 'Invalid Phone Number',
-                ]);
+         $username = Teacher::where('phone', $request->phone)->first();
+         
+          if ($username && $username->teacher_status == 0) {   
+              return response()->json([
+                  'message' => 'Your account is inactive',
+                  'status' => 600,
+                ]); // HTTP status code 429 for too many requests
             }
-        }
-    }
+    
+
+         // Rate-limiting (Throttle)
+    $throttleKey = Str::lower($request->input('email')) . '|' . $request->ip();
+
+    if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
+         $seconds = RateLimiter::availableIn($throttleKey);
+         return response()->json([
+             'message' => 'Too many login attempts. Please try again in ' . $seconds . ' seconds.',
+             'status' => 600,
+          ]); // HTTP status code 429 for too many requests
+       }
+
+      if (!$username || !Hash::check($request->password, $username->password)) {
+          // Increment the throttle attempts if login fails
+           RateLimiter::hit($throttleKey);  
+
+         return response()->json([
+             'message' => 'These credentials do not match our records.',
+             'status' => 600,
+           ]); // HTTP status code 422 for validation error
+         }
+
+             RateLimiter::clear($throttleKey);
+
+              $rand = rand(11111, 99999);
+              DB::update("update teachers set login_code ='$rand' where phone = '$username->phone'");
+              SendEmail($username->email, "teacher Otp code", "One Time OTP Code", $rand, "ANCOVA");
+                 return response()->json([
+                       'status' => 200,
+                       'phone' => $username->phone,
+                       'email' => $username->email,
+                   ]);
+          }
+       }
 
 
     public function login_verify(Request $request)

@@ -6,7 +6,7 @@
   <div class="card mt-3 mb-0"> 
    <div class="card-header ">
     <div class="row">
-                 <div class="col-sm-3 my-2"> <h5 class="mt-0"> Member View </h5></div>
+                 <div class="col-sm-3 my-2"> <h5 class="mt-0"> User View </h5></div>
                    <div class="col-sm-3 my-2">
                       <div class="d-grid gap-2 d-flex justify-content-end"> 
                          <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">Add</button>  
@@ -57,7 +57,7 @@
     <thead>
        <tr>
           <th  width="10%"> Image</th>
-          <th width="25%" class="sorting" data-sorting_type="asc" data-column_name="teacher_name" style="cursor: pointer">Member Name 
+          <th width="25%" class="sorting" data-sorting_type="asc" data-column_name="teacher_name" style="cursor: pointer">User Name 
                 <span id="teacher_name_icon" ><i class="fas fa-sort-amount-up-alt"></i></span> </th>
           <th  width="20%"> Nick Name</th>
           <th  width="25%"> Designation </th>
@@ -67,11 +67,6 @@
           <th  width="10%"> </th>
 		      <th  width="10%"> </th>
           <th  width="10%"> </th>
-          <th  width="10%"> Present address </th>
-          <th  width="10%"> Permanent address </th>
-		      <th  width="10%"> Bank details </th>
-          <th  width="10%"> Login Code </th>
-       
       </tr>
 
        <tr>
@@ -114,7 +109,7 @@
           <div class="row">
 
             <div class="col-lg-12 my-2">
-               <label for="roll">Member Name<span style="color:red;"> * </span></label>
+               <label for="roll">User Name<span style="color:red;"> * </span></label>
                <input type="text" name="teacher_name" id="teacher_name" class="form-control" placeholder="" required>
                <p class="text-danger error_teacher_name"></p>
             </div>
@@ -151,14 +146,14 @@
                 <p class="text-danger error_nickname"></p>
             </div>
 
-            <div class="col-lg-12 my-2">
-                <label for="roll">Present address </label>
+            <!-- <div class="col-lg-12 my-2">
+                <label for="roll"> Present address </label>
                 <input type="text" name="present_address" id="present_address" class="form-control" placeholder="" >
                 <p class="text-danger error_present_address"></p>
             </div>
 
             <div class="col-lg-12 my-2">
-                <label for="roll">Permanent address </label>
+                <label for="roll"> Permanent address </label>
                 <input type="text" name="permanent_address" id="permanent_address" class="form-control" placeholder="" >
                 <p class="text-danger error_permanent_address"></p>
             </div>
@@ -167,11 +162,11 @@
                 <label for="roll">Bank details </label>
                 <input type="text" name="bank_details" id="bank_details" class="form-control" placeholder="" >
                 <p class="text-danger error_bank_details"></p>
-            </div>
+            </div> -->
 
 
             <div class="col-lg-12 my-2">
-                <label for="roll"> Image (Max:300*300px)</label>
+                <label for="roll"> Image (Max:400KB)</label>
                 <input type="file" name="image" id="image" class="form-control" placeholder="" >
                 <p class="text-danger error_building_image"></p>
             </div>
@@ -259,7 +254,7 @@
                 <p class="text-danger error_nickname"></p>
             </div>
 
-            <div class="col-lg-12 my-2">
+            <!-- <div class="col-lg-12 my-2">
                 <label for="roll">Present_address </label>
                 <input type="text" name="present_address" id="edit_present_address" class="form-control" placeholder="" >
                 <p class="text-danger error_present_address"></p>
@@ -275,11 +270,11 @@
                 <label for="roll">Bank details </label>
                 <input type="text" name="bank_details" id="edit_bank_details" class="form-control" placeholder="" >
                 <p class="text-danger error_bank_details"></p>
-            </div>
+            </div> -->
 
 
             <div class="col-lg-12 my-2">
-                <label for="roll"> Image (Max:300*300px)</label>
+                <label for="roll"> Image (Max:400KB)</label>
                 <input type="file" name="image" id="image" class="form-control" placeholder="" >
                 <p class="text-danger error_building_image"></p>
             </div>

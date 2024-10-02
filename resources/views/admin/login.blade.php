@@ -135,11 +135,7 @@ $(document).ready(function(){
 						    $('.error_phone').text("");
 						    $('.error_password').text("");
 							$('.loginform').hide();
-							$('.verifyform').show();
-				    }else if(response.status == 300){
-					     $('.error_phone').text(response.message);
-				    }else if(response.status == 400){
-					     $('.error_password').text(response.message);
+							$('.verifyform').show();			  
 				    }else if(response.status == 600){
 					     $('.error_password').text(response.message);
 				    }else if(response.status == 700){
