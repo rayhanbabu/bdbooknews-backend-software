@@ -43,6 +43,7 @@ use App\Http\Controllers\AdsController;
    
    
      Route::middleware('MaintainToken')->group(function(){
+
           Route::get('/maintain/dashboard',[MaintainController::class,'dashboard']);
           Route::get('/maintain/logout',[MaintainController::class,'logout']);
 
@@ -165,25 +166,26 @@ use App\Http\Controllers\AdsController;
             Route::post('/admin/subcategory_update',[SubcategoryController::class,'subcategory_update']);
             Route::delete('/admin/subcategory_delete',[SubcategoryController::class,'subcategory_delete']);
             
-          // news  Event
-          Route::get('/admin/news_view/',[NewsController::class,'index']);
-          Route::get('/admin/news_fetch/',[NewsController::class,'fetch']);
-          Route::get('/admin/news/fetch_data/',[NewsController::class,'fetch_data']); 
+           // news  Event
+           Route::get('/admin/news_view/',[NewsController::class,'index']);
+           Route::get('/admin/news_fetch/',[NewsController::class,'fetch']);
+           Route::get('/admin/news/fetch_data/',[NewsController::class,'fetch_data']); 
  
-          Route::get('/admin/news_create',[NewsController::class,'news_create']);
-          Route::post('/admin/news_insert',[NewsController::class,'store']); 
-          Route::get('/admin/news_view/{id}',[NewsController::class,'view']);
-          Route::get('/admin/news_edit/{id}',[NewsController::class,'edit']);
-          Route::post('/admin/news_update/{id}',[NewsController::class,'update']);
-          Route::get('/admin/news_delete/{id}',[NewsController::class,'destroy']);
+           Route::get('/admin/news_create',[NewsController::class,'news_create']);
+           Route::post('/admin/news_insert',[NewsController::class,'store']); 
+           Route::get('/admin/news_view/{id}',[NewsController::class,'view']);
+           Route::get('/admin/news_edit/{id}',[NewsController::class,'edit']);
+           Route::get('/admin/news_fatch/{id}',[NewsController::class,'edit_fatch']);
+           Route::post('/admin/news_update',[NewsController::class,'update']);
+           Route::get('/admin/news_delete/{id}',[NewsController::class,'destroy']);
 
-          Route::get('/category_id_fetch',[NewsController::class,'category_id_fetch']);
-          Route::get('/district_id_fetch',[NewsController::class,'district_id_fetch']);
-          Route::get('/upazila_id_fetch',[NewsController::class,'upazila_id_fetch']);
+           Route::get('/category_id_fetch',[NewsController::class,'category_id_fetch']);
+           Route::get('/district_id_fetch',[NewsController::class,'district_id_fetch']);
+           Route::get('/upazila_id_fetch',[NewsController::class,'upazila_id_fetch']);
 
       
-          // Reports pdf
-          Route::get('/pdf/semester_routine', [PdfController::class,'semester_routine_pdf']);
+           // Reports pdf
+           Route::get('/pdf/semester_routine', [PdfController::class,'semester_routine_pdf']);
       });
 
      

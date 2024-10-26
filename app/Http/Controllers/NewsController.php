@@ -118,7 +118,7 @@ class NewsController extends Controller
               $filename = time() .'.'. $image->getClientOriginalExtension();
               $filePath = public_path('uploads/admin/') . $filename;
               $image = Image::load($image->getPathname())
-              ->width(840)
+              ->width(600)
               ->save($filePath);
               $model->image=$filename;
          }
@@ -140,11 +140,9 @@ class NewsController extends Controller
                 $model->image1=$filename;
              }
            }
-
-
         $model->save();
 
-        return redirect()->back()->with('success','Data Added Successfuly');
+        return redirect('admin/news_view')->with('success','Data Added Successfuly');
        
      }
 
@@ -164,15 +162,24 @@ class NewsController extends Controller
 
 
      public function edit(Request $request ,$id)
-     {
+      {
          $data = News::find($id);
-         return view('admin.news_edit',['data'=>$data]);
-     }
+         return view('admin.news_edit',['id'=>$id,'data'=>$data]);
+       }
 
-     public function update(Request $request, $id)
-     {
 
-        $validated = $request->validate([
+       public function edit_fatch(Request $request) {
+         $id = $request->id;
+         $data = News::find($id);
+         return response()->json([
+             'status'=>200,  
+             'data'=>$data,
+          ]);
+       }
+
+     public function update(Request $request) {
+
+      $validator=\Validator::make($request->all(),[    
          'desc'=>'required',
          'image' =>'file|mimes:jpeg,png,jpg|max:10240',
          'title'=>'required',
@@ -180,7 +187,14 @@ class NewsController extends Controller
          'image1' =>'file|mimes:jpeg,png,jpg,pdf|max:10240',
         ]);
 
-        $model = News::find($id);
+    if($validator->fails()){
+           return response()->json([
+              'status' => 'fail',
+              'message' => 'All fields are required',
+             ]);
+     }else{
+
+        $model = News::find($request->input('edit_id'));
         $model->category_name_id=$request->input('category_name_id');
         $model->subcategory_name_id=$request->input('subcategory_name_id');
         $model->title=$request->input('title');
@@ -228,7 +242,12 @@ class NewsController extends Controller
            }
         $model->save();
 
-        return redirect()->back()->with('success','Data Updated Successfuly');
+          return response()->json([
+            'status' => 'success',
+            'message' => 'Data Updated successfully',
+           ]);
+
+      }
    }
 
 

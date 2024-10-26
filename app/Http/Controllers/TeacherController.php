@@ -89,7 +89,7 @@ class TeacherController extends Controller
            ]); // HTTP status code 422 for validation error
          }
 
-             RateLimiter::clear($throttleKey);
+              RateLimiter::clear($throttleKey);
 
               $rand = rand(11111, 99999);
               DB::update("update teachers set login_code ='$rand' where phone = '$username->phone'");

@@ -7,6 +7,7 @@
     use Illuminate\Support\Facades\Cookie;
     use App\Models\Week;
     use App\Models\Category;
+    use App\Models\Subcategory;
 
        function prx($arr){
            echo "<pre>";
@@ -83,10 +84,32 @@
             return $category;
       }
 
+      function subcategory(){
+        $token_teacher=Cookie::get('token_teacher');
+        $result=TeacherJWTToken::ReadToken($token_teacher);    
+        $category=Subcategory::where('dept_id',$result->dept_id)->orderby('serial','asc')->orderBy('id','desc')->get();
+        return $category;
+  }
+
          function division(){ 
             $data=DB::table('divisions')->orderBy('name','asc')->get();
              return $data;
          }
+
+         function district(){
+            $data = DB::table('districts')->orderBy('name','asc')->get();
+            return $data;
+         }
+ 
+         function upazila(){
+           $data = DB::table('upazilas')->orderBy('name','asc')->get();
+           return $data;
+        }
+ 
+        function union(){
+         $data = DB::table('unions')->orderBy('name','asc')->get();
+         return $data;
+      }
 
         
         function teacher_info(){
